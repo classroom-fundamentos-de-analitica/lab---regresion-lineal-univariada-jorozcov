@@ -75,10 +75,10 @@ def pregunta_03():
     df = pd.read_csv("gm_2008_region.csv")
 
     # Asigne a la variable los valores de la columna `fertility`
-    X_fertility = df["fertility"].values.reshape(-1,1)
+    X_fertility = df.fertility.values.reshape(-1,1)
 
     # Asigne a la variable los valores de la columna `life`
-    y_life = df["life"].values.reshape(-1,1)
+    y_life = df.life.values.reshape(-1,1)
 
     # Importe LinearRegression
     from sklearn.linear_model import LinearRegression
@@ -89,9 +89,9 @@ def pregunta_03():
     # Cree El espacio de predicción. Esto es, use linspace para crear
     # un vector con valores entre el máximo y el mínimo de X_fertility
     prediction_space = np.linspace(
-        X_fertility.min(),
-        X_fertility.max(),
-    ).reshape(1,-1)
+        min(X_fertility),
+        max(X_fertility),
+    ).reshape(-1, 1)
 
     # Entrene el modelo usando X_fertility y y_life
     reg.fit(X_fertility,y_life)
@@ -100,7 +100,7 @@ def pregunta_03():
     y_pred = reg.predict(prediction_space)
 
     # Imprima el R^2 del modelo con 4 decimales
-    print(reg.score(X_fertility, y_pred).round(4))
+    print(reg.score(X_fertility, y_life).round(4))
 
 def pregunta_04():
     """
